@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Binary1010Generator</title>
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <div id="left">
+            <img src="./images/logo.jpg"/>
+            <h1>Binary 1010 Generator</h1>
+        </div>
+        <div id="nav">
+            <nav>
+                <ul>
+                    <li><a href="/">Generate</a></li>
+                    <li><a href="/TextToBinary">Text To Binary</a></li>
+                    <li><a href="/BinaryToText">Binary To Text</a></li>
+                    <li><a href="/About">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header> 
+    <main>
+        @RenderBody()
+    </main>
+    <footer>
+        <p>&copy; 2025 - Binary 1010 Generator</p>
+        <p> All rights reserved.</p>
+    </footer>
+</body>
+</html>
