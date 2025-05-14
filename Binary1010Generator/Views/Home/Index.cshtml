@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="title">Welcome To Binary Generator</h1>
-    <form id="centralSystem" action="/Home/GenerateBinary" method="post">
+    <form id="centralSystem" action="/" method="post">
         <p>Please select your type:</p>
         <div id="radio">
             <input type="radio" id="word" name="fav_language" value="Word" required>
@@ -29,21 +29,26 @@
         <button onclick="copy()">Copy To ClipBoard</button>
     </div>
     <script>
-         document.getElementById("centralSystem").addEventListener("submit", function(event) {
+         document.getElementById('centralSystem').addEventListener('submit', function(event) {
             event.preventDefault();
 
             let formData = new FormData(this);
 
-            fetch("/Home/GenerateBinary", {
+            fetch("/", {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.text();
+            })
             .then(data => {
                 document.getElementById("result").value = data;
             })
             .catch(error => {
-                console.error("Error:", error);
+                document.getElementById("result").value = 'Error: ' + error;
             });
         });
 

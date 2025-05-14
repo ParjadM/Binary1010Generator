@@ -5,31 +5,39 @@ namespace Binary1010Generator.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        public IActionResult Index()
         {
-            _logger = logger;
+            return View();
         }
-
-        public IActionResult Index() => View();
-
         [HttpPost]
-        [Route("Home/GenerateBinary")]
+        [Route("/")]
         public IActionResult GenerateBinary(string fav_language, int size)
         {
-            int type = fav_language switch
+            int type;
+            if (fav_language == "Word")
             {
-                "Word" => 1,
-                "Sentence" => 2,
-                "Paragraph" => 3,
-                _ => -1
-            };
+                type = 1;
+            }
+            else if (fav_language == "Sentence")
+            {
+                type = 2;
+            }
+            else if (fav_language == "Paragraph")
+            {
+                type = 3;
+            }
+            else
+            {
+                type = -1;
+            }
 
-            if (type == -1) return BadRequest("Invalid selection!");
+            if (type == -1)
+            {
+                return BadRequest("Invalid selection!");
+            }
 
             
-            string binaryOutput = Binary1010GeneratorLib.Binary1010Generator.GenerateBinary(type, size);
+            string binaryOutput = BinGen.GenerateBinary(type, size);
 
             return Content(binaryOutput, "text/plain");
         }
