@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using BinGen = Binary1010GeneratorLib.Binary1010Generator;
+using Binary1010GeneratorLib;
+using System.Threading.Tasks;
 
 namespace Binary1010Generator.Controllers
 {
@@ -9,9 +10,8 @@ namespace Binary1010Generator.Controllers
         {
             return View();
         }
-        [HttpPost]
-        [Route("/")]
-        public IActionResult GenerateBinary(string fav_language, int size)
+
+        public static async Task<string> GenerateBinary(string fav_language, int size)
         {
             int type;
             if (fav_language == "Word")
@@ -22,7 +22,7 @@ namespace Binary1010Generator.Controllers
             {
                 type = 2;
             }
-            else if (fav_language == "Paragraph")
+            else if (fav_language == "Whole")
             {
                 type = 3;
             }
@@ -33,13 +33,11 @@ namespace Binary1010Generator.Controllers
 
             if (type == -1)
             {
-                return BadRequest("Invalid selection!");
+                return "Invalid selection!";
             }
 
-            
-            string binaryOutput = BinGen.GenerateBinary(type, size);
-
-            return Content(binaryOutput, "text/plain");
+            string test = await Binary1010GeneratorLib.Binary1010Generator.GenerateBinary(type, size);
+            return test;
         }
     }
 }

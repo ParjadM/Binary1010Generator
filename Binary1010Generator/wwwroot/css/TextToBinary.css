@@ -41,7 +41,18 @@ textarea {
     text-align: center;
 }
 
-#btn {
+#convertToBinary {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    background-color: #2f70b8;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#convertToText {
     display: block;
     margin: 20px auto;
     padding: 10px 15px;
